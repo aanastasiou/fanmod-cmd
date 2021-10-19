@@ -4,9 +4,8 @@
 #define MAXN 64
 
 extern "C" {
-   #include "nauty/nauty.h"
-   #include "nauty/nautinv.h"
-   //#include "nauty/gtools.h"
+   #include "nauty/nauty26r12/nauty.h"
+   #include "nauty/nauty26r12/nautinv.h"
 }
 
 #endif
