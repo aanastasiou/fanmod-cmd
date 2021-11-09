@@ -5,13 +5,11 @@ NAUTY_ARCHIVE=$(NAUTY_ARCHIVE_BASE).tar.gz
 NAUTY_URL=$(NAUTY_URL_BASE)/$(NAUTY_ARCHIVE)
 NAUTY_DIR=nauty/$(NAUTY_ARCHIVE_BASE)
 
-nauty/$(NAUTY_ARCHIVE):
-	wget -O nauty/$(NAUTY_ARCHIVE) $(NAUTY_URL)
-
-$(NAUTY_DIR)/nauty.h:nauty/$(NAUTY_ARCHIVE)
-	tar -xf nauty/$(NAUTY_ARCHIVE) --directory nauty/
 
 $(NAUTY_DIR)/config.status:
+	if [ ! -d nauty/ ]; then mkdir nauty/; fi
+	wget -O nauty/$(NAUTY_ARCHIVE) $(NAUTY_URL)
+	tar -xf nauty/$(NAUTY_ARCHIVE) --directory nauty/
 	cd $(NAUTY_DIR);./configure;
 
 nauty $(NAUTY_DIR)/dreadnaut $(NAUTY_DIR)/nauty.a $(NAUTY_DIR)/nauty1.a $(NAUTY_DIR)/nautyW.a $(NAUTY_DIR)/nautyW1.a $(NAUTY_DIR)/nautyL.a $(NAUTY_DIR)/nautyL1.a:$(NAUTY_DIR)/config.status
